@@ -1,3 +1,8 @@
 from django.shortcuts import render
+from django.http import HttpResponse
+from .views_auth import handle_login, handle_logout
 
-# Create your views here.
+
+def home(request):
+    index = open('build/index.html').read()
+    return HttpResponse(index)
