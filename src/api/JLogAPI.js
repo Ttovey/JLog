@@ -3,7 +3,7 @@ import axios from 'axios'
 const JLogAPI = {}
 const BASE_URL = ""
 
-tryCatchFetch = async (axiosCall) => {
+const tryCatchFetch = async (axiosCall) => {
   try {
     const response = await axiosCall()
     console.log("RESPONSE:", response)
@@ -17,4 +17,4 @@ tryCatchFetch = async (axiosCall) => {
   }
 }
 
-export default apiHelpers
+export default JLogAPI;
