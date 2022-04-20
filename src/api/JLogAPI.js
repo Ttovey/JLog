@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const JLogAPI = {}
-const BASE_URL = ""
+const BASE_URL = "http://127.0.0.1:8000/jlog_api/"
 
 const tryCatchFetch = async (axiosCall) => {
   try {
@@ -15,6 +15,10 @@ const tryCatchFetch = async (axiosCall) => {
     console.error("error", e.response ? e.response.data : e)
     return null
   }
+}
+
+JLogAPI.login = async (data) => {
+  return await tryCatchFetch(() => axios.post(`${BASE_URL}login/`, data))
 }
 
 export default JLogAPI;

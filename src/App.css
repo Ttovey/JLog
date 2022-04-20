@@ -7,7 +7,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(to bottom, #DDFDFF, #AAFAFF);
+  background: linear-gradient(to bottom, #5a5f5f, #253233);
   height: 100px;
 }
 
@@ -24,7 +24,7 @@
 }
 
 #header-menu {
-  background: linear-gradient(to right, #AAFAFF, #99E9EE, #AAFAFF);
+  background: #3f4242;
   font-weight: 500;
   bottom: 0;
   width: 100vw;

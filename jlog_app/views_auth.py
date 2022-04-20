@@ -9,6 +9,7 @@ def error_on_request(error_msg):
 def bad_request():
     return error_on_request("bad request")
 
+@csrf_exempt
 def handle_login(request):
     try:
         if request.method == "POST":
@@ -28,6 +29,7 @@ def handle_login(request):
     
     return bad_request()
 
+@csrf_exempt
 def handle_logout(request):
     try:
         if request.method == "POST":
