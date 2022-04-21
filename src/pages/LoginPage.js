@@ -11,11 +11,11 @@ function LoginPage(props) {
     const userData = {}
     userData.username = e.target.elements['username'].value
     userData.password = e.target.elements['password'].value
-    console.log(userData)
+
     const response = await JLogAPI.login(userData)
-    console.log(response)
     if (response) {
       props.setUsername(userData.username)
+      localStorage.setItem('user', userData.username)
       navigate('/')
     }
 

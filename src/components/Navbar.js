@@ -1,4 +1,4 @@
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import JLogAPI from "../api/JLogAPI";
 
 function Navbar(props) {
@@ -6,7 +6,12 @@ function Navbar(props) {
   const navigate = useNavigate()
 
   const doLogout = async () => {
-    console.log('log out')
+    const response = await JLogAPI.logout()
+    if (response) {
+      props.setUsername('')
+      localStorage.clear()
+      navigate('/')
+    }
   }
 
   const authRender = () => {

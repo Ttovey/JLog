@@ -1,7 +1,19 @@
 import axios from 'axios'
+import Cookie from "js-cookie"
 
 const JLogAPI = {}
-const BASE_URL = "http://127.0.0.1:8000/jlog_api/"
+// const BASE_URL = "http://127.0.0.1:8000/jlog_api/"
+// const BASE_URL = "http://localhost:8000/jlog_api/"
+const BASE_URL = "/jlog_api/"
+
+const getCsrfConfig = () => {
+  return { 
+    withCredentials: true, // this needs to be done for the separate project setup
+    headers: {
+      'X-CSRFToken': Cookie.get("csrftoken")
+    }
+  }
+}
 
 const tryCatchFetch = async (axiosCall) => {
   try {
@@ -18,7 +30,11 @@ const tryCatchFetch = async (axiosCall) => {
 }
 
 JLogAPI.login = async (data) => {
-  return await tryCatchFetch(() => axios.post(`${BASE_URL}login/`, data))
+  return await tryCatchFetch(() => axios.post(`${BASE_URL}login/`, data, getCsrfConfig()))
+}
+
+JLogAPI.logout = async () => {
+  return await tryCatchFetch(() => axios.post(`${BASE_URL}logout/`, getCsrfConfig()))
 }
 
 export default JLogAPI;

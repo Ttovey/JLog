@@ -1,6 +1,6 @@
 import './App.css';
 import {HashRouter, Routes, Route} from 'react-router-dom'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 //components
 import Navbar from './components/Navbar'
@@ -19,6 +19,13 @@ import SignUpPage from './pages/SignUpPage';
 function App() {
 
   const [username, setUsername] = useState('')
+  console.log(localStorage)
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem('user')
+    if (loggedInUser) {
+      setUsername(loggedInUser)
+    }
+  }, [])
 
   return (
     <div className="App">
