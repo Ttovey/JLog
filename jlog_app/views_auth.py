@@ -1,7 +1,9 @@
 import json
+from django.http.response import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.contrib.auth import authenticate, login, logout
+from .models import User
 
 def error_on_request(error_msg):
     return JsonResponse({ "error": error_msg }, status=400)
@@ -41,3 +43,16 @@ def handle_logout(request):
 
     
     return bad_request()
+
+@csrf_exempt
+def handle_signup(request):
+    try:
+        if request.method == 'POST':
+            data = json.loads(request.body)
+            print(data)
+            username = data['username']
+            password = data['password']
+            User.objects.create_user(username=username, password=password)
+    except Exception as e:
+        return error_on_request(str(e))
+    return HttpResponse('User Created.')

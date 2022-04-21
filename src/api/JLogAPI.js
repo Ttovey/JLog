@@ -33,6 +33,10 @@ JLogAPI.login = async (data) => {
   return await tryCatchFetch(() => axios.post(`${BASE_URL}login/`, data, getCsrfConfig()))
 }
 
+JLogAPI.signUp = async (data) => {
+  return await tryCatchFetch(() => axios.post(`${BASE_URL}sign_up/`, data, getCsrfConfig()))
+}
+
 JLogAPI.logout = async () => {
   return await tryCatchFetch(() => axios.post(`${BASE_URL}logout/`, getCsrfConfig()))
 }
