@@ -3,7 +3,7 @@ import {HashRouter, Routes, Route} from 'react-router-dom'
 import { useEffect, useState } from 'react';
 
 //components
-import Navbar from './components/Navbar'
+import MyNavbar from './components/MyNavbar'
 
 //pages
 import Activities from './pages/Activites';
@@ -15,6 +15,7 @@ import Journal from './pages/Journal'
 //auth pages
 import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
+import CheckLoginPage from './pages/CheckLoginPage';
 
 function App() {
 
@@ -30,13 +31,14 @@ function App() {
   return (
     <div className="App">
       <HashRouter>
-      <Navbar username={ username } setUsername={ setUsername }/>
+      <MyNavbar username={ username } setUsername={ setUsername }/>
       <Routes>
       {/* Auth Routes */}
       <Route path='/login' element={ <LoginPage setUsername={ setUsername }/>} />
       <Route path="/signup" element={ <SignUpPage /> } />
 
       {/* Main Routes */}
+      <Route path='/' element={<CheckLoginPage username={username} actualPage={() => <DashBoard username={username}/>}/>}/>
       </Routes>
       </HashRouter>
     </div>
