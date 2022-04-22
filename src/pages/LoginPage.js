@@ -14,8 +14,12 @@ function LoginPage(props) {
 
     const response = await JLogAPI.login(userData)
     if (response) {
+      //notify state of logged in user and userid
       props.setUsername(userData.username)
+      props.setUserId(response.userId)
+      //load user and userid into local storage to persist the data
       localStorage.setItem('user', userData.username)
+      localStorage.setItem('userId', response.userId)
       navigate('/')
     }
 

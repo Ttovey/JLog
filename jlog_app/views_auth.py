@@ -23,7 +23,7 @@ def handle_login(request):
             user = authenticate(username=username, password=password)
             if user:
                 login(request, user)
-                return JsonResponse(data={ "username": user.username }, status=200)
+                return JsonResponse(data={ "user": user.username, 'userId': user.id }, status=200)
     
     except Exception as e:
         return error_on_request(str(e))

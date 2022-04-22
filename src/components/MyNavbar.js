@@ -18,40 +18,46 @@ function MyNavbar(props) {
   const authRender = () => {
     if (props.username === '') {
       return (
-        <div className='auth-items'>
-          {/* &nbsp;|&nbsp;
-          <Link to="/login">Login</Link>
-          &nbsp;|&nbsp;
-          <Link to="/signup">Sign Up</Link> */}
+        <Nav className='auth-items ml-auto'>
           &nbsp;|&nbsp;
           <Nav.Link as={Link} to='/login'>Login</Nav.Link>
           &nbsp;|&nbsp;
           <Nav.Link as={Link} to='/signup'>Sign Up</Nav.Link>
-        </div>
+        </Nav>
       )
     }
 
     return (
       <div className='auth-items'>
         &nbsp;|&nbsp;
-        {/* <Link to="#" onClick={ doLogout } >Logout</Link> */}
-        <Nav.Link onClick={ doLogout } >Logout</Nav.Link>
-        <Nav.Link to='#'>{props.username}</Nav.Link>
+        <Nav className='ml-auto'>
+          <Nav.Link onClick={ doLogout } >Logout</Nav.Link>
+          <Nav.Link to='#'>{props.username}</Nav.Link>
+        </Nav>
       </div>
     )
+  }
+
+  const regRender = () => {
+    if (props.username !== '') {
+      return (
+        <Nav className="me-auto">
+        <Nav.Link as={Link} to='/'>DashBoard</Nav.Link>
+        <Nav.Link as={Link} to='/activities'>Activites</Nav.Link>
+        </Nav>
+      )
+    }
   }
 
   return (
     <>
   <Navbar bg="dark" variant="dark" className='nav'>
     <Container>
-    <Navbar.Brand href="/">JLog</Navbar.Brand>
-    <Nav className="me-auto">
-      <Nav.Link href="/">DashBoard</Nav.Link>
-    </Nav>
-    <Nav className='ml-auto'>
-      { authRender() }
-    </Nav>
+    <Navbar.Brand href="#">JLog</Navbar.Brand>
+
+    { regRender() }
+    { authRender() }
+    
     </Container>
   </Navbar>
 </>
