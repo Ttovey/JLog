@@ -29,6 +29,7 @@ const tryCatchFetch = async (axiosCall) => {
   }
 }
 
+// AUTH ROUTES
 JLogAPI.login = async (data) => {
   return await tryCatchFetch(() => axios.post(`${BASE_URL}login/`, data, getCsrfConfig()))
 }
@@ -39,6 +40,15 @@ JLogAPI.signUp = async (data) => {
 
 JLogAPI.logout = async () => {
   return await tryCatchFetch(() => axios.post(`${BASE_URL}logout/`, getCsrfConfig()))
+}
+
+// Jiu Jitsu Routes!
+JLogAPI.createJiuJitsu = async (data) => {
+  return await tryCatchFetch(() => axios.post(`${BASE_URL}jiujitsu/`, data, getCsrfConfig()))
+}
+
+JLogAPI.getJiuJitsu = async () => {
+  return await tryCatchFetch(() => axios.get(`${BASE_URL}jiujitsu/`))
 }
 
 export default JLogAPI;

@@ -4,6 +4,9 @@ from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 
+router.register('jiujitsu', views.JiuJitsuViewSet, basename='jiujitsu')
+router.register('submission', views.SubmissionViewSet, basename='submission')
+
 urlpatterns = [
     path('', views.home),
     path('jlog_api/', include(router.urls)),
