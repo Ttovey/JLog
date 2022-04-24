@@ -45,6 +45,7 @@ function AddActivityModal(props) {
     console.log(evt)
 
     const activityData = {}
+    const subs = []
     if (activity === 'Jiu Jitsu') {
       activityData.name = evt.target.elements['name'].value
       activityData.user_id = localStorage.getItem('userId')
@@ -54,13 +55,25 @@ function AddActivityModal(props) {
       activityData.submissions = []
       if (submissionGroups) {
         for (let i = 0; i < submissionGroups; i++) {
-          // add submissions
+          const curSub = {}
+          curSub.name = evt.target.elements[`sub-name-${i}`].value
+          curSub.count = evt.target.elements[`sub-number-${i}`].value
+          subs.push(curSub)
         }
       }
     }
     const data = await JLogAPI.createJiuJitsu(activityData)
     if (data) {
-      const newJiuJitsu = [...props.jiuJitsu, data]
+      // if creation success, add submissions now that we have data id
+      if (submissionGroups) {
+        const sub_data = await Promise.all(subs.map((sub, index) => {
+          sub.jiu_jitsu_id = data.id
+          return JLogAPI.createSubmission(sub)
+        }))
+        data.submissions = sub_data
+      }
+      
+      const newJiuJitsu = [data, ...props.jiuJitsu]
       props.setJiuJitsu(newJiuJitsu)
       handleClose()
     }

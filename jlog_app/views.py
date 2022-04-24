@@ -17,7 +17,8 @@ class JiuJitsuViewSet(ModelViewSet):
     
     def get_queryset(self):
         user = self.request.user
-        return JiuJitsu.objects.filter(user_id=user)
+        queryset = JiuJitsu.objects.filter(user_id=user).order_by('-date')
+        return queryset
 
 class SubmissionViewSet(ModelViewSet):
     queryset = Submission.objects.all()

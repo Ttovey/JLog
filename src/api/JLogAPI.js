@@ -52,8 +52,18 @@ JLogAPI.getJiuJitsu = async () => {
   return await tryCatchFetch(() => axios.get(`${BASE_URL}jiujitsu/`))
 }
 
+JLogAPI.updateJiuJitsu = async (id, data) => {
+  return await tryCatchFetch(() => axios.put(`${BASE_URL}jiujitsu/${id}`, data, getCsrfConfig()))
+}
+
 JLogAPI.deleteJiuJitsu = async (id) => {
   return await tryCatchFetch(() => axios.delete(`${BASE_URL}jiujitsu/${id}`, getCsrfConfig()))
+}
+
+// Sub Routes!
+
+JLogAPI.createSubmission  = async (data) => {
+  return await tryCatchFetch(() => axios.post(`${BASE_URL}submission/`, data, getCsrfConfig()))
 }
 
 export default JLogAPI;
