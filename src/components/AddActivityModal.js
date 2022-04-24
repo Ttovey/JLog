@@ -45,12 +45,14 @@ function AddActivityModal(props) {
     console.log(evt)
 
     const activityData = {}
+
+    activityData.name = evt.target.elements['name'].value
+    activityData.user_id = localStorage.getItem('userId')
+    activityData.description = evt.target.elements['description'].value
+    activityData.duration = evt.target.elements['duration'].value
+
     const subs = []
     if (activity === 'Jiu Jitsu') {
-      activityData.name = evt.target.elements['name'].value
-      activityData.user_id = localStorage.getItem('userId')
-      activityData.description = evt.target.elements['description'].value
-      activityData.duration = evt.target.elements['duration'].value
       activityData.rolls = evt.target.elements['rolls'].value
       activityData.submissions = []
       if (submissionGroups) {
@@ -72,7 +74,7 @@ function AddActivityModal(props) {
         }))
         data.submissions = sub_data
       }
-      
+
       const newJiuJitsu = [data, ...props.jiuJitsu]
       props.setJiuJitsu(newJiuJitsu)
       handleClose()

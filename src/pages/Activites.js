@@ -32,7 +32,7 @@ function Activities() {
       return jiuJitsu.map((jitz, index) => {
         console.log(jitz)
         return <Accordion.Item eventKey={`${index}`}>
-                <Accordion.Header>{jitz.name} : {jitz.date.slice(0, 10)}</Accordion.Header>
+                <Accordion.Header><em>Jiu Jitsu </em> : {jitz.name} - {jitz.date.slice(0, 10)}</Accordion.Header>
                 <Accordion.Body className="text-left">
                   <ListGroup>
                     <ListGroup.Item>Description: {jitz.description}</ListGroup.Item>

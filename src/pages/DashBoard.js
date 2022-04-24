@@ -1,8 +1,10 @@
+import BarChart from "../components/Chart";
+
 function DashBoard(props) {
   return (
     <div>
-      <h2>DashBoard Page!</h2>
       <p>Welcome { props.username }</p>
+      <BarChart />
     </div>
   )
 }
