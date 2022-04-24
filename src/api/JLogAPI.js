@@ -7,6 +7,7 @@ const JLogAPI = {}
 const BASE_URL = "/jlog_api/"
 
 const getCsrfConfig = () => {
+  console.log(Cookie.get("csrftoken"))
   return { 
     withCredentials: true, // this needs to be done for the separate project setup
     headers: {
@@ -39,7 +40,7 @@ JLogAPI.signUp = async (data) => {
 }
 
 JLogAPI.logout = async () => {
-  return await tryCatchFetch(() => axios.post(`${BASE_URL}logout/`, getCsrfConfig()))
+  return await tryCatchFetch(() => axios.post(`${BASE_URL}logout/`, null, getCsrfConfig()))
 }
 
 // Jiu Jitsu Routes!
@@ -49,6 +50,10 @@ JLogAPI.createJiuJitsu = async (data) => {
 
 JLogAPI.getJiuJitsu = async () => {
   return await tryCatchFetch(() => axios.get(`${BASE_URL}jiujitsu/`))
+}
+
+JLogAPI.deleteJiuJitsu = async (id) => {
+  return await tryCatchFetch(() => axios.delete(`${BASE_URL}jiujitsu/${id}`, getCsrfConfig()))
 }
 
 export default JLogAPI;

@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  background-color: lightslategrey;
+  height: 100vh;
 }
 
 .nav {
@@ -48,4 +50,24 @@
 
 navLink:visited {
   color: black;
+}
+
+ul {
+  text-align: center;
+  list-style-position: inside;
+}
+
+.activity-section {
+  width: 50vw;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.activity-modal {
+  position: relative;
+}
+
+.activity-form {
+  position: absolute;
+  width: 50%;
 }

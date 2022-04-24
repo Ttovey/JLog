@@ -4,6 +4,8 @@ from django.http import HttpResponse
 from .models import JiuJitsu, Submission
 from .serializers import JiuJitsuSerializer, SubmissionSerializer
 from .views_auth import handle_login, handle_logout, handle_signup
+from rest_framework import permissions
+from django.views.decorators.csrf import csrf_exempt
 
 
 def home(request):
@@ -12,7 +14,7 @@ def home(request):
 
 class JiuJitsuViewSet(ModelViewSet):
     serializer_class = JiuJitsuSerializer
-
+    
     def get_queryset(self):
         user = self.request.user
         return JiuJitsu.objects.filter(user_id=user)
