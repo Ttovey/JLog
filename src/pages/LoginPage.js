@@ -1,4 +1,5 @@
 import { Navigate, useNavigate } from "react-router-dom"
+import { Form, Button } from 'react-bootstrap'
 import JLogAPI from "../api/JLogAPI"
 
 function LoginPage(props) {
@@ -27,18 +28,21 @@ function LoginPage(props) {
 
   return (
     <div>
-      <h2>Login Page</h2>
-      <br />
-
-      <form onSubmit={ handleLogin }> 
-        <label>Username</label>
-        <input type='text' name='username' placeholder='username'></input>
-        <br />
-        <label>Password</label>
-        <input type='text' name='password' placeholder='password'></input>
-        <br />
-        <button type="submit">Login</button>
-      </form>
+      <div className="auth-forms">
+      <Form onSubmit={ handleLogin } className='rounded p-4 p-sm-3 auth-page-form'>
+        <h2>Log In</h2>
+        <Form.Group className="mb-3">
+          <Form.Label>Username</Form.Label>
+          <Form.Control type='text' placeholder='enter username' name='username'/>
+        </Form.Group>
+        <Form.Group className="mb-3" controlId='formBasicPassword'>
+          <Form.Label>Password</Form.Label>
+          <Form.Control type='password' placeholder='password' name='password'/>
+        </Form.Group>
+        <Button type="submit" variant='primary'>Log In</Button>
+      </Form>
+      </div>
+     
 
     </div>
   )

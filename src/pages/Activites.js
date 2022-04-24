@@ -1,7 +1,7 @@
 import AddActivityModal from "../components/AddActivityModal";
 import { useEffect, useState } from "react";
 import JLogAPI from "../api/JLogAPI";
-import { Accordion, Button } from "react-bootstrap";
+import { Accordion, Button, ListGroup } from "react-bootstrap";
 
 
 function Activities() {
@@ -33,15 +33,15 @@ function Activities() {
         console.log(jitz)
         return <Accordion.Item eventKey={`${index}`}>
                 <Accordion.Header>{jitz.name} : {jitz.date.slice(0, 10)}</Accordion.Header>
-                <Accordion.Body>
-                  <p>{jitz.description}</p>
-                  <p>Duration: {jitz.duration} minutes</p>
-                  <p>Rolls: {jitz.rolls}</p>
-                  <ul>Submissions:{jitz.submissions.map((sub, index) => {
-                    return <li>{sub.name} : {sub.count}</li>
-                  })}</ul>
-                  <hr />
-                  <Button variant='danger' onClick={() => handleDelete(jitz.id)}>Delete</Button>
+                <Accordion.Body className="text-left">
+                  <ListGroup>
+                    <ListGroup.Item>Description: {jitz.description}</ListGroup.Item>
+                    <ListGroup.Item>Duration: {jitz.duration} minutes</ListGroup.Item>
+                    <ListGroup.Item>Rolls: {jitz.rolls}</ListGroup.Item>
+                    <ListGroup.Item>Submissions: <ul>{jitz.submissions.map((sub, index) => {
+                    return <li>{sub.name} : {sub.count}</li>})}</ul></ListGroup.Item>
+                  </ListGroup>
+                  <Button variant='danger' className="ml-auto" onClick={() => handleDelete(jitz.id)}>Delete</Button>
                 </Accordion.Body>
               </Accordion.Item>
       })

@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import JLogAPI from '../api/JLogAPI'
+import {Form, Button} from 'react-bootstrap'
 
 function SignUpPage(props) {
   const navigate = useNavigate()
@@ -28,22 +29,24 @@ function SignUpPage(props) {
 
   return (
     <div>
-      <h2>Sign Up Page</h2>
-      <br />
-
-      <form onSubmit={ handleSignUp }> 
-        <label>Username</label>
-        <input type='text' name='username' placeholder='username'></input>
-        <br />
-        <label>Password</label>
-        <input type='text' name='password' placeholder='password'></input>
-        <br />
-        <label>Confirm Password</label>
-        <input type='text' name='confirm-password' placeholder='confirm password'></input>
-        <br />
-        <button type="submit">Login</button>
-      </form>
-
+      <div className="auth-forms">
+      <Form onSubmit={ handleSignUp } className='rounded p-4 p-sm-3 auth-page-form'>
+        <h2>Sign Up</h2>
+        <Form.Group className="mb-3">
+          <Form.Label>Username</Form.Label>
+          <Form.Control type='text' placeholder='enter username' name='username'/>
+        </Form.Group>
+        <Form.Group className="mb-3" controlId='formBasicPassword'>
+          <Form.Label>Password</Form.Label>
+          <Form.Control type='password' placeholder='password' name='password'/>
+        </Form.Group>
+        <Form.Group className="mb-3" controlId='formBasicPassword'>
+          <Form.Label>Confirm Password</Form.Label>
+          <Form.Control type='password' placeholder='confirm password' name='confirm-password'/>
+        </Form.Group>
+        <Button type="submit" variant='primary'>Sign Up</Button>
+      </Form>
+      </div>
     </div>
   )
 
