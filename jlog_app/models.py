@@ -1,13 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
-from datetime import datetime
+from django.utils.timezone import now
 
 class Activity(models.Model):
     name = models.CharField(max_length=32)
     description = models.TextField(blank=True, null=True)
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     duration = models.IntegerField(default=0)
-    date = models.DateTimeField(default=datetime.now, blank=True)
+    date = models.DateTimeField(default=now)
 
     class Meta:
         verbose_name = 'Activity'

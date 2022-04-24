@@ -70,7 +70,7 @@ function AddActivityModal(props) {
     if (activity === 'Jiu Jitsu') {
       console.log('Jiu Jitsu FOrm!')
       return (
-        <Form onSubmit={handleFormSubmissions} className='activity-section px-3'>
+        <Form onSubmit={handleFormSubmissions} className='px-3'>
            <hr />
           <Form.Group className="mb-3">
             <Form.Label>Activity Name</Form.Label>
@@ -106,7 +106,7 @@ function AddActivityModal(props) {
 
       <Button variant='secondary' className="mt-2" onClick={handleShow}>Add Activity</Button>
 
-      <Modal show={show} onHide={handleClose} className='text-center activity-modal'>
+      <Modal show={show} onHide={handleClose} className='text-center'>
         <Modal.Header closeButton>
           <Modal.Title>Add a Activity</Modal.Title>
         </Modal.Header>

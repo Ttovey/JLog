@@ -22,14 +22,17 @@ function Activities() {
 
   const handleDelete = async (id) => {
     const res = await JLogAPI.deleteJiuJitsu(id)
-    console.log(res)
+    if (res) {
+      loadJiuJitsu()
+    }
   }
 
   const renderJiuJitsu = () => {
     if (jiuJitsu !== []) {
       return jiuJitsu.map((jitz, index) => {
+        console.log(jitz)
         return <Accordion.Item eventKey={`${index}`}>
-                <Accordion.Header>{jitz.name}</Accordion.Header>
+                <Accordion.Header>{jitz.name} : {jitz.date.slice(0, 10)}</Accordion.Header>
                 <Accordion.Body>
                   <p>{jitz.description}</p>
                   <p>Duration: {jitz.duration} minutes</p>

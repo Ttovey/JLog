@@ -13,6 +13,6 @@ class JiuJitsuSerializer(serializers.ModelSerializer):
     submissions = SubmissionSerializer(many=True, read_only=True)
     class Meta:
         model = JiuJitsu
-        fields = ["id", "user_id","name", "description", "duration", "rolls", "submissions"]
+        fields = ["id", "user_id","name", "description", "duration", "rolls", "submissions", "date"]
 
     
