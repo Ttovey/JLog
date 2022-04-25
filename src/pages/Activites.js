@@ -15,7 +15,6 @@ function Activities() {
   const loadJiuJitsu = async () => {
     const data = await JLogAPI.getJiuJitsu()
     if (data) {
-      console.log(data)
       setJiuJitsu(data)
     }
   }
