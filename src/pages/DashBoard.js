@@ -6,7 +6,8 @@ import {Dropdown} from 'react-bootstrap'
 function DashBoard(props) {
   
   const [jiuJitsu, setJiuJitsu] = useState(null)
-  // const [jiuJitsuStats, setJiuJitsuStats] = useState({})
+  const [jiuJitsuData, setJiuJitsuData] = useState(null)
+  const [timeRange, setTimeRange] = useState('All Time')
 
   useEffect(() => {
     loadJiuJitsu()
@@ -16,29 +17,36 @@ function DashBoard(props) {
     const data = await JLogAPI.getJiuJitsu()
     if (data) {
       setJiuJitsu(data)
+      setJiuJitsuData(data)
     }
   }
 
-  const addQuery = (evt) => {
-    console.log(evt.target.text)
+  const addDate = (evt) => {
+    let timeDict = {'Week': 604800000, 'Month': 2629800000,'3 Months': 7889400000, 'Year': 31557600000}
+
+    let selectedTimeRange = evt.target.text
+    if (timeRange === selectedTimeRange) {
+      return
+    }
+    setTimeRange(selectedTimeRange)
+    if (selectedTimeRange === 'All Time') {
+      setJiuJitsuData(jiuJitsu)
+      return
+    }
+
     let today = new Date()
     today = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()
     today = new Date(today)
-    jiuJitsu.forEach((jitz) => {
+
+    const jitzDataByDate = jiuJitsu.filter((jitz) => {
       let jitzDate = new Date(jitz.date.slice(0, 10))
       let dateDiff = Math.abs(today - jitzDate)
-      if (dateDiff < 604800000) {
-        console.log('This happened less than a week ago')
-      } else if (dateDiff < 2629800000 ) {
-        console.log('This happened less than a month ago')
-      } else if (dateDiff < 7889400000) {
-        console.log('This happened less than 3 months ago')
-      } else if (dateDiff < 31557600000) {
-        console.log('This happened less than a year ago')
-      } else {
-        console.log('This was a long time ago')
-      }
+      return dateDiff < timeDict[evt.target.text]
     })
+
+    console.log(jitzDataByDate)
+    setJiuJitsuData(jitzDataByDate)
+
   }
 
   let jiuJitsuStats = null
@@ -47,9 +55,9 @@ function DashBoard(props) {
     let totalRolls = 0;
     let totalSessions = 0;
     if (jiuJitsu) {
-      for (let i = 0; i < jiuJitsu.length; i++) {
-        totalTime += jiuJitsu[i].duration
-        totalRolls += jiuJitsu[i].rolls
+      for (let i = 0; i < jiuJitsuData.length; i++) {
+        totalTime += jiuJitsuData[i].duration
+        totalRolls += jiuJitsuData[i].rolls
         totalSessions += 1
       }
     }
@@ -68,16 +76,18 @@ function DashBoard(props) {
         <Dropdown.Toggle className='mt-1' size='sm' variant="secondary" id="dropdown-basic">
           Select Time Range
         </Dropdown.Toggle>
-
         <Dropdown.Menu>
-          <Dropdown.Item onClick={addQuery}>All Time</Dropdown.Item>
-          <Dropdown.Item onClick={addQuery}>Week</Dropdown.Item>
-          <Dropdown.Item onClick={addQuery}>Month</Dropdown.Item>
-          <Dropdown.Item onClick={addQuery}>3 Months</Dropdown.Item>
-          <Dropdown.Item onClick={addQuery}>Year</Dropdown.Item>
+          <Dropdown.Item onClick={addDate}>All Time</Dropdown.Item>
+          <Dropdown.Item onClick={addDate}>Week</Dropdown.Item>
+          <Dropdown.Item onClick={addDate}>Month</Dropdown.Item>
+          <Dropdown.Item onClick={addDate}>3 Months</Dropdown.Item>
+          <Dropdown.Item onClick={addDate}>Year</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
-      <BarChart jiuJitsu={jiuJitsu}/>
+
+      <p>Time Range: {timeRange}</p>
+
+      <BarChart jiuJitsu={jiuJitsuData}/>
       <div className="stats mt-1">
         <h3 className="mt-2"><strong>Jiu Jitsu Stats</strong></h3>
         <hr className="line"/>
