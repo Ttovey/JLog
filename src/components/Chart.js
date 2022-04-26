@@ -3,20 +3,7 @@ import JLogAPI from '../api/JLogAPI'
 import { Chart as ChartJS } from 'chart.js/auto'
 import { Chart, Bar, Line } from 'react-chartjs-2'
 
-function BarChart() {
-
-  const [jiuJitsu, setJiuJitsu] = useState(null)
-
-  useEffect(() => {
-    loadJiuJitsu()
-  }, [])
-
-  const loadJiuJitsu = async () => {
-    const data = await JLogAPI.getJiuJitsu()
-    if (data) {
-      setJiuJitsu(data)
-    }
-  }
+function BarChart(props) {
 
   const getRandomColor = () => {
     var letters = '0123456789ABCDEF'.split('');
@@ -35,22 +22,13 @@ function BarChart() {
         label: 'Submission Data',
         data: [],
         backgroundColor: [],
-        // borderColor: [
-        //   'rgb(255, 99, 132)',
-        //   'rgb(255, 159, 64)',
-        //   'rgb(255, 205, 86)',
-        //   'rgb(75, 192, 192)',
-        //   'rgb(54, 162, 235)',
-        //   'rgb(153, 102, 255)',
-        //   'rgb(201, 203, 207)'
-        // ],
         borderWidth: 1
       }]
     }
   
     const subs = {}
-    for (let i = 0; i < jiuJitsu.length; i++) {
-      for(let sub of jiuJitsu[i].submissions) {
+    for (let i = 0; i < props.jiuJitsu.length; i++) {
+      for(let sub of props.jiuJitsu[i].submissions) {
         if(sub.name in subs){
           subs[sub.name] += sub.count
         } else {
@@ -59,7 +37,6 @@ function BarChart() {
       }
     }
     for (let sub of Object.entries(subs)) {
-      console.log(sub)
       data.labels.push(sub[0])
       data.datasets[0].data.push(sub[1])
       data.datasets[0].backgroundColor.push(getRandomColor())
@@ -69,9 +46,9 @@ function BarChart() {
   }
 
   return (
-    <div className='chart'>
+    <div className='chart mt-1'>
       {
-        jiuJitsu &&
+        props.jiuJitsu &&
         <Bar 
         data={createSubChartData()}
         options={{
