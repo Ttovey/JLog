@@ -1,4 +1,5 @@
-import AddActivityModal from "../components/AddActivityModal";
+import AddActivityModal from "../components/ActivityModal/AddActivityModal";
+import Paginate from "../components/Paginate";
 import { useEffect, useState } from "react";
 import JLogAPI from "../api/JLogAPI";
 import { Accordion, Button, ListGroup } from "react-bootstrap";
@@ -7,6 +8,8 @@ import { Accordion, Button, ListGroup } from "react-bootstrap";
 function Activities() {
 
   const [jiuJitsu, setJiuJitsu] = useState([])
+  const [currentPage, setCurrentPage] = useState(1)
+  const [activitiesPerPage, setActivitiesPerPage] = useState(7)
 
   useEffect(() => {
     loadJiuJitsu()
@@ -26,10 +29,11 @@ function Activities() {
     }
   }
 
-  const renderJiuJitsu = () => {
+  const paginate = (pageNumber) => setCurrentPage(pageNumber)
+
+  const renderJiuJitsu = (data) => {
     if (jiuJitsu !== []) {
-      return jiuJitsu.map((jitz, index) => {
-        console.log(jitz)
+      return data.map((jitz, index) => {
         return <Accordion.Item eventKey={`${index}`}>
                 <Accordion.Header><em>Jiu Jitsu </em> : {jitz.name} - {jitz.date.slice(0, 10)}</Accordion.Header>
                 <Accordion.Body className="text-left">
@@ -47,14 +51,20 @@ function Activities() {
     }
   }
 
+  const indexOfLastActivity = currentPage * activitiesPerPage
+  const indexOfFirstActivity = indexOfLastActivity - activitiesPerPage
+  const currentActivities = jiuJitsu.slice(indexOfFirstActivity, indexOfLastActivity)
+  console.log(currentActivities)
+
   return (
     <div>
      <AddActivityModal jiuJitsu={jiuJitsu} setJiuJitsu={setJiuJitsu}/>
      <hr />
      <div className="activity-section">
      <Accordion>
-     { renderJiuJitsu() }
+     { renderJiuJitsu(currentActivities) }
      </Accordion>
+     { jiuJitsu.length > 0 && <Paginate activitiesPerPage={activitiesPerPage} totalActivities={jiuJitsu.length} paginate={paginate}/>}
      </div>
     </div>
   )

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Modal, Button, Dropdown, DropdownButton, Form } from "react-bootstrap";
-import JLogAPI from "../api/JLogAPI";
+import JLogAPI from "../../api/JLogAPI";
 
 function AddActivityModal(props) {
 
@@ -18,7 +18,6 @@ function AddActivityModal(props) {
 
   const handleSelectActivity = (evt) => {
     const newActivity = evt.target.text
-    console.log(newActivity)
     setActivity(newActivity)
   }
 
@@ -83,7 +82,6 @@ function AddActivityModal(props) {
 
   const renderActivityForms = (evt) => {
     if (activity === 'Jiu Jitsu') {
-      console.log('Jiu Jitsu FOrm!')
       return (
         <Form onSubmit={handleFormSubmissions} className='px-3'>
            <hr />
