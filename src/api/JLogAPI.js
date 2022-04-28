@@ -66,4 +66,16 @@ JLogAPI.createSubmission  = async (data) => {
   return await tryCatchFetch(() => axios.post(`${BASE_URL}submission/`, data, getCsrfConfig()))
 }
 
+// Strength Training Routes!
+
+JLogAPI.createStrengthTraining = async (data) => {
+  return await tryCatchFetch(() => axios.post(`${BASE_URL}strengthtraining/`, data, getCsrfConfig()))
+}
+
+// Set Routes!
+
+JLogAPI.createSet = async (data) => {
+  return await tryCatchFetch(() => axios.post(`${BASE_URL}set/`, data, getCsrfConfig()))
+}
+
 export default JLogAPI;

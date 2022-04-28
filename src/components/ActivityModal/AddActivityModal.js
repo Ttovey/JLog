@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Modal, Button, Dropdown, DropdownButton, Form } from "react-bootstrap";
 import JLogAPI from "../../api/JLogAPI";
 import JiuJitsuForm from "./JiuJitsuForm";
+import StrengthTrainingForm from "./StrengthTrainingForm";
 
 function AddActivityModal(props) {
 
@@ -21,9 +22,9 @@ function AddActivityModal(props) {
 
   const renderActivityForms = (evt) => {
     if (activity === 'Jiu Jitsu') {
-      return (
-        <JiuJitsuForm jiuJitsu={props.jiuJitsu} setJiuJitsu={props.setJiuJitsu} activity={activity} setActivity={setActivity} setShow={setShow}/>
-      )
+      return <JiuJitsuForm jiuJitsu={props.jiuJitsu} setJiuJitsu={props.setJiuJitsu} activity={activity} setActivity={setActivity} setShow={setShow}/>
+    } else if (activity === 'Strength Training') {
+      return <StrengthTrainingForm strengthTraining={props.strengthTraining} setStrengthTraining={props.setStrengthTraining} activity={activity} setActivity={setActivity} setShow={setShow}/>
     }
   }
 

@@ -8,6 +8,7 @@ import { Accordion, Button, ListGroup } from "react-bootstrap";
 function Activities() {
 
   const [jiuJitsu, setJiuJitsu] = useState([])
+  const [strengthTraining, setStrengthTraining] = useState([])
   const [currentPage, setCurrentPage] = useState(1)
   const [activitiesPerPage, setActivitiesPerPage] = useState(7)
 
@@ -54,11 +55,10 @@ function Activities() {
   const indexOfLastActivity = currentPage * activitiesPerPage
   const indexOfFirstActivity = indexOfLastActivity - activitiesPerPage
   const currentActivities = jiuJitsu.slice(indexOfFirstActivity, indexOfLastActivity)
-  console.log(currentActivities)
 
   return (
     <div>
-     <AddActivityModal jiuJitsu={jiuJitsu} setJiuJitsu={setJiuJitsu}/>
+     <AddActivityModal jiuJitsu={jiuJitsu} setJiuJitsu={setJiuJitsu} strengthTraining={strengthTraining} setStrengthTraining={setStrengthTraining}/>
      <hr />
      <div className="activity-section">
      <Accordion>

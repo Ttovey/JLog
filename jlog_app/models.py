@@ -35,3 +35,21 @@ class Submission(models.Model):
 
     def __str__(self):
         return f'{self.name} : {self.count}'
+
+class StrengthTraining(Activity):
+    pass
+
+    class Meta:
+        verbose_name = 'Strength Training'
+        verbose_name_plural = 'Strength Trainings'
+
+    def __str__(self):
+        return f'{self.name}'
+
+class Set(models.Model):
+    name = models.CharField(max_length=32)
+    count = models.IntegerField(default=1)
+    reps = models.IntegerField(default=1)
+    weight = models.IntegerField(default=0)
+    strength_id = models.ForeignKey(StrengthTraining, on_delete=models.CASCADE, related_name='sets')
+    

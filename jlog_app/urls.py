@@ -6,6 +6,8 @@ router = DefaultRouter()
 
 router.register('jiujitsu', views.JiuJitsuViewSet, basename='jiujitsu')
 router.register('submission', views.SubmissionViewSet, basename='submission')
+router.register('strengthtraining', views.StrengthTrainingViewSet, basename='strengthtraining')
+router.register('set', views.SetViewSet, basename='set')
 
 urlpatterns = [
     path('', views.home),

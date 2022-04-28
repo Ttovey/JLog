@@ -93,7 +93,7 @@ function DashBoard(props) {
         <hr className="line"/>
         <div className="display-stats">
           <p>Total Rolls: {jiuJitsuStats.totalRolls}</p>
-          <p>Total Time: {jiuJitsuStats.totalTime}</p>
+          <p>Total Time: {jiuJitsuStats.totalTime} minutes</p>
           <p>Total Sessions: {jiuJitsuStats.totalSessions}</p>
         </div>
       </div>
