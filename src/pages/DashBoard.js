@@ -44,7 +44,6 @@ function DashBoard(props) {
       return dateDiff < timeDict[evt.target.text]
     })
 
-    console.log(jitzDataByDate)
     setJiuJitsuData(jitzDataByDate)
 
   }

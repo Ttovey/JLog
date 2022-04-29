@@ -18,7 +18,7 @@ class JiuJitsuSerializer(serializers.ModelSerializer):
 class SetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Set
-        fields = ['id', 'name', 'count', 'reps', 'strength_id']
+        fields = ['id', 'name', 'count', 'reps', 'weight', 'strength_id']
 
 class StrengthTrainingSerializer(serializers.ModelSerializer):
     sets = SetSerializer(many=True, read_only=True)

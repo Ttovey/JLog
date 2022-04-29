@@ -72,6 +72,14 @@ JLogAPI.createStrengthTraining = async (data) => {
   return await tryCatchFetch(() => axios.post(`${BASE_URL}strengthtraining/`, data, getCsrfConfig()))
 }
 
+JLogAPI.getStrengthTraining = async () => {
+  return await tryCatchFetch(() => axios.get(`${BASE_URL}strengthtraining/`))
+}
+
+JLogAPI.deleteStrengthTraining = async (id) => {
+  return await tryCatchFetch(() => axios.delete(`${BASE_URL}strengthtraining/${id}`, getCsrfConfig()))
+}
+
 // Set Routes!
 
 JLogAPI.createSet = async (data) => {
