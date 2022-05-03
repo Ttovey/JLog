@@ -33,7 +33,7 @@ function DashBoard(props) {
       </Dropdown>
 
       <p>Display Data: {displayData}</p>
-
+      <hr />
       { renderData() }
 
     </div>

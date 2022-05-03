@@ -1,71 +1,72 @@
 import {useEffect, useState} from 'react'
 import { Dropdown } from "react-bootstrap"
 import JLogAPI from "../../api/JLogAPI"
+import LineChart from './LineChart'
 
 function StrengthDash() {
   const [timeRange, setTimeRange] = useState('All Time')
-  const [jiuJitsu, setJiuJitsu] = useState(null)
-  const [jiuJitsuData, setJiuJitsuData] = useState(null)
+  const [strengthTraining, setStrengthTraining] = useState(null)
+  const [strengthTrainingData, setStrengthTrainingData] = useState(null)
 
   useEffect(() => {
-    loadJiuJitsu()
+    loadStrengthTraining()
   }, [])
 
-  const loadJiuJitsu = async () => {
-    const data = await JLogAPI.getJiuJitsu()
+  const loadStrengthTraining = async () => {
+    const data = await JLogAPI.getStrengthTraining()
     if (data) {
-      setJiuJitsu(data)
-      setJiuJitsuData(data)
+      setStrengthTraining(data)
+      setStrengthTrainingData(data)
     }
   }
+  const addDate = [];
+  // const addDate = (evt) => {
+  //   let timeDict = {'Week': 604800000, 'Month': 2629800000,'3 Months': 7889400000, 'Year': 31557600000}
 
-  const addDate = (evt) => {
-    let timeDict = {'Week': 604800000, 'Month': 2629800000,'3 Months': 7889400000, 'Year': 31557600000}
+  //   let selectedTimeRange = evt.target.text
+  //   if (timeRange === selectedTimeRange) {
+  //     return
+  //   }
+  //   setTimeRange(selectedTimeRange)
+  //   if (selectedTimeRange === 'All Time') {
+  //     setJiuJitsuData(jiuJitsu)
+  //     return
+  //   }
 
-    let selectedTimeRange = evt.target.text
-    if (timeRange === selectedTimeRange) {
-      return
-    }
-    setTimeRange(selectedTimeRange)
-    if (selectedTimeRange === 'All Time') {
-      setJiuJitsuData(jiuJitsu)
-      return
-    }
+  //   let today = new Date()
+  //   today = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()
+  //   today = new Date(today)
 
-    let today = new Date()
-    today = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()
-    today = new Date(today)
+  //   const jitzDataByDate = jiuJitsu.filter((jitz) => {
+  //     let jitzDate = new Date(jitz.date.slice(0, 10))
+  //     let dateDiff = Math.abs(today - jitzDate)
+  //     return dateDiff < timeDict[evt.target.text]
+  //   })
 
-    const jitzDataByDate = jiuJitsu.filter((jitz) => {
-      let jitzDate = new Date(jitz.date.slice(0, 10))
-      let dateDiff = Math.abs(today - jitzDate)
-      return dateDiff < timeDict[evt.target.text]
-    })
+  //   setJiuJitsuData(jitzDataByDate)
 
-    setJiuJitsuData(jitzDataByDate)
+  // }
 
-  }
+  // let jiuJitsuStats = null
+  // const getJitzStats = () => {
+  //   let totalTime = 0;
+  //   let totalRolls = 0;
+  //   let totalSessions = 0;
+  //   if (jiuJitsu) {
+  //     for (let i = 0; i < jiuJitsuData.length; i++) {
+  //       totalTime += jiuJitsuData[i].duration
+  //       totalRolls += jiuJitsuData[i].rolls
+  //       totalSessions += 1
+  //     }
+  //   }
+  //   let newJiuJitsuStats = {}
+  //   newJiuJitsuStats.totalTime = totalTime
+  //   newJiuJitsuStats.totalRolls = totalRolls
+  //   newJiuJitsuStats.totalSessions = totalSessions
+  //   jiuJitsuStats = newJiuJitsuStats
+  // }
 
-  let jiuJitsuStats = null
-  const getJitzStats = () => {
-    let totalTime = 0;
-    let totalRolls = 0;
-    let totalSessions = 0;
-    if (jiuJitsu) {
-      for (let i = 0; i < jiuJitsuData.length; i++) {
-        totalTime += jiuJitsuData[i].duration
-        totalRolls += jiuJitsuData[i].rolls
-        totalSessions += 1
-      }
-    }
-    let newJiuJitsuStats = {}
-    newJiuJitsuStats.totalTime = totalTime
-    newJiuJitsuStats.totalRolls = totalRolls
-    newJiuJitsuStats.totalSessions = totalSessions
-    jiuJitsuStats = newJiuJitsuStats
-  }
-
-  getJitzStats()
+  // getJitzStats()
 
   return (
     <div>
@@ -84,14 +85,14 @@ function StrengthDash() {
 
       <p>Time Range: {timeRange}</p>
 
-      <BarChart jiuJitsu={jiuJitsuData}/>
+      {strengthTrainingData && <LineChart data={strengthTrainingData}/>}
       <div className="stats mt-1">
-      <h3 className="mt-2"><strong>Jiu Jitsu Stats</strong></h3>
+      <h3 className="mt-2"><strong>Strength Training Stats</strong></h3>
       <hr className="line"/>
       <div className="display-stats">
-        <p>Total Rolls: {jiuJitsuStats.totalRolls}</p>
-        <p>Total Time: {jiuJitsuStats.totalTime} minutes</p>
-        <p>Total Sessions: {jiuJitsuStats.totalSessions}</p>
+        <p>Total Time: {} minutes</p>
+        <p>Total Sessions: {}</p>
+        <p>Total Weight: {}</p>
       </div>
     </div>
     </div>
