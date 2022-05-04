@@ -43,3 +43,23 @@ class TestJiuJitsu(TestCase):
         serializer = JiuJitsuSerializer(detail_jiujitsu)
         self.assertEqual(response.data, serializer.data)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_update_jiujitsu(self):
+        data = json.dumps({'name': 'Update Name'})
+        response = client.patch(reverse('jiujitsu-detail', args=[2]), data, content_type='application/json')
+        detail_jiujitsu = JiuJitsu.objects.get(id=2)
+        print(response.status_code)
+        print(detail_jiujitsu)
+        print(response.data)
+        self.assertEqual(response.data['name'], detail_jiujitsu.name)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_delete_jiujitsu(self):
+        response = client.delete(reverse('jiujitsu-detail', args=[1]))
+        try:
+            deleted_jiujitsu = JiuJitsu.objects.get(id=1)
+        except JiuJitsu.DoesNotExist:
+            deleted_jiujitsu = None
+        
+        self.assertEqual(deleted_jiujitsu, None)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
