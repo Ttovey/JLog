@@ -24,6 +24,9 @@ class JiuJitsu(Activity):
         verbose_name = 'Jiu Jitsu'
         verbose_name_plural = 'Jiu Jitsu'
 
+    def __str__(self):
+        return f'{self.name}'
+
 class Submission(models.Model):
     name = models.CharField(max_length=32)
     count = models.IntegerField(default=1)
