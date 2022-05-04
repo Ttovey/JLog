@@ -10,9 +10,9 @@ router.register('strengthtraining', views.StrengthTrainingViewSet, basename='str
 router.register('set', views.SetViewSet, basename='set')
 
 urlpatterns = [
-    path('', views.home),
+    path('', views.home, name='home'),
     path('jlog_api/', include(router.urls)),
-    path('jlog_api/sign_up/', views.handle_signup),
-    path('jlog_api/logout/', views.handle_logout),
-    path('jlog_api/login/', views.handle_login)
+    path('jlog_api/sign_up/', views.handle_signup, name='signup'),
+    path('jlog_api/logout/', views.handle_logout, name='logout'),
+    path('jlog_api/login/', views.handle_login, name='login')
 ]

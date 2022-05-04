@@ -30,25 +30,30 @@ function LineChart(props) {
       datasets: []
     }
     
+    const datasetLabels = []
+
     props.data.forEach((training) => {
-      data.labels.push(training.date.slice(0, 10))
-      const setDic = {}
+      const setData = {}
       training.sets.forEach((set) => {
-        if (set.name in setDic) {
-          setDic[set.name] += set.count * set.reps * set.weight
+        if (!datasetLabels.includes(set.name)) {
+          datasetLabels.push(set.name)
+        }
+        if (set.name in setData) {
+          setData[set.name] += set.count * set.reps * set.weight
         } else {
-          setDic[set.name] = set.count * set.reps * set.weight
+          setData[set.name] = set.count * set.reps * set.weight
         }
       })
-      // insert helper func here to build datasets
+      console.log(setData)
     })
+
   }
 
   createLineChartData()
 
   return (
     <div>
-
+      {/* <Line data={createLineChartData()}/> */}
     </div>
   )
 }

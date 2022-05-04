@@ -52,4 +52,6 @@ class Set(models.Model):
     reps = models.IntegerField(default=1)
     weight = models.IntegerField(default=0)
     strength_id = models.ForeignKey(StrengthTraining, on_delete=models.CASCADE, related_name='sets')
+
+
     
