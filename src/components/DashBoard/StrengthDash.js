@@ -7,6 +7,7 @@ function StrengthDash() {
   const [timeRange, setTimeRange] = useState('All Time')
   const [strengthTraining, setStrengthTraining] = useState(null)
   const [strengthTrainingData, setStrengthTrainingData] = useState(null)
+  const [workout, setWorkOut] = useState(null)
 
   useEffect(() => {
     loadStrengthTraining()
@@ -19,54 +20,34 @@ function StrengthDash() {
       setStrengthTrainingData(data)
     }
   }
-  const addDate = [];
-  // const addDate = (evt) => {
-  //   let timeDict = {'Week': 604800000, 'Month': 2629800000,'3 Months': 7889400000, 'Year': 31557600000}
 
-  //   let selectedTimeRange = evt.target.text
-  //   if (timeRange === selectedTimeRange) {
-  //     return
-  //   }
-  //   setTimeRange(selectedTimeRange)
-  //   if (selectedTimeRange === 'All Time') {
-  //     setJiuJitsuData(jiuJitsu)
-  //     return
-  //   }
+  const renderWorkoutDropdown = () => {
+    const workouts = []
+    strengthTrainingData.forEach((data) => {
+      data.sets.forEach((set) => {
+        if (!workouts.includes(set.name)) {
+          workouts.push(set.name)
+        }
+      })
+    })
+    const dropdownItems = []
+    workouts.forEach((workout) => {
+      dropdownItems.push(<Dropdown.Item onClick={changeWorkout}>{workout}</Dropdown.Item>)
+    })
+    console.log(dropdownItems)
+    return dropdownItems
+    
+  }
 
-  //   let today = new Date()
-  //   today = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate()
-  //   today = new Date(today)
+  const addDate = () => {
 
-  //   const jitzDataByDate = jiuJitsu.filter((jitz) => {
-  //     let jitzDate = new Date(jitz.date.slice(0, 10))
-  //     let dateDiff = Math.abs(today - jitzDate)
-  //     return dateDiff < timeDict[evt.target.text]
-  //   })
+  }
 
-  //   setJiuJitsuData(jitzDataByDate)
+  const changeWorkout = (evt) => {
+    console.log(evt.target.text)
+    setWorkOut(evt.target.text)
+  }
 
-  // }
-
-  // let jiuJitsuStats = null
-  // const getJitzStats = () => {
-  //   let totalTime = 0;
-  //   let totalRolls = 0;
-  //   let totalSessions = 0;
-  //   if (jiuJitsu) {
-  //     for (let i = 0; i < jiuJitsuData.length; i++) {
-  //       totalTime += jiuJitsuData[i].duration
-  //       totalRolls += jiuJitsuData[i].rolls
-  //       totalSessions += 1
-  //     }
-  //   }
-  //   let newJiuJitsuStats = {}
-  //   newJiuJitsuStats.totalTime = totalTime
-  //   newJiuJitsuStats.totalRolls = totalRolls
-  //   newJiuJitsuStats.totalSessions = totalSessions
-  //   jiuJitsuStats = newJiuJitsuStats
-  // }
-
-  // getJitzStats()
 
   return (
     <div>
@@ -85,7 +66,16 @@ function StrengthDash() {
 
       <p>Time Range: {timeRange}</p>
 
-      {strengthTrainingData && <LineChart data={strengthTrainingData}/>}
+      <Dropdown>
+        <Dropdown.Toggle className='mt-1' size='sm' variant="secondary" id="dropdown-basic">
+          Select Workout
+        </Dropdown.Toggle>
+        <Dropdown.Menu>
+          {strengthTrainingData && renderWorkoutDropdown()}
+        </Dropdown.Menu>
+      </Dropdown>
+
+      {strengthTrainingData && <LineChart data={strengthTrainingData} workout={workout}/>}
       <div className="stats mt-1">
       <h3 className="mt-2"><strong>Strength Training Stats</strong></h3>
       <hr className="line"/>
