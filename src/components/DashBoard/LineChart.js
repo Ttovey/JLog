@@ -26,22 +26,35 @@ function LineChart(props) {
       exercise.label = props.workout
       exercise.borderColor = getRandomColor()
       exercise.fill = false
-      datasets.push(exercise)
 
-      props.data.forEach(())
+      console.log(props.workout)
+      props.data.forEach((workout) => {
+        let workingLoad = 0
+        workout.sets.forEach((set) => {
+          if (set.name == props.workout) {
+            workingLoad += set.count * set.reps * set.weight
+          }
+        })
+        console.log(workout)
+        console.log('working Load')
+        console.log(workingLoad)
+        if (workingLoad > 0) {
+          data.labels.push(workout.date.slice(0, 10))
+          exercise.data.push(workingLoad)
+          
+        }
+      })
+      data.datasets.push(exercise)
     }
-
-    console.log(props.data)
-    console.log(props.workout)
-
+    
     return data
   }
 
-  createLineChartData()
-
   return (
-    <div>
-      {/* <Line data={createLineChartData()}/> */}
+    <div className='chart mt-1'>
+      {props.workout && <Line data={createLineChartData()} options={{
+          maintainAspectRatio: false
+        }}/>}
     </div>
   )
 }
