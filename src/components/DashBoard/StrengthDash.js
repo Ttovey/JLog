@@ -76,7 +76,7 @@ function StrengthDash() {
       </Dropdown>
 
       {strengthTrainingData && <LineChart data={strengthTrainingData} workout={workout}/>}
-      <div className="stats mt-1">
+      {/* <div className="stats mt-1">
       <h3 className="mt-2"><strong>Strength Training Stats</strong></h3>
       <hr className="line"/>
       <div className="display-stats">
@@ -84,7 +84,7 @@ function StrengthDash() {
         <p>Total Sessions: {}</p>
         <p>Total Weight: {}</p>
       </div>
-    </div>
+    </div> */}
     </div>
   )
 }
