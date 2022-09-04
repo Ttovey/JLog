@@ -2,9 +2,9 @@ import axios from 'axios'
 import Cookie from "js-cookie"
 
 const JLogAPI = {}
-// const BASE_URL = "http://127.0.0.1:8000/jlog_api/"
+const BASE_URL = "http://127.0.0.1:8000/jlog_api/"
 // const BASE_URL = "http://localhost:8000/jlog_api/"
-const BASE_URL = "/jlog_api/"
+// const BASE_URL = "/jlog_api/"
 
 const getCsrfConfig = () => {
   console.log(Cookie.get("csrftoken"))
